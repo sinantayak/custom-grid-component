@@ -48,7 +48,7 @@ export class GridComponent implements OnInit {
     });
   }
 
-  setCurrentPageData() {
+  setCurrentPageData(dontSort?: boolean) {
     const startIndex = (this.pageNumber - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     this.data = this.allData.slice(startIndex, endIndex);
@@ -63,7 +63,7 @@ export class GridComponent implements OnInit {
       this.groupData(this.activeGroupingColumn, false);
     }
 
-    if (this.sortingColumn) {
+    if (this.sortingColumn && dontSort) {
       this.sortData(this.sortingColumn, true);
     }
   }
@@ -137,7 +137,8 @@ export class GridComponent implements OnInit {
       this.sortingOrder = 'asc';
     }
 
-    this.data.sort((a, b) => {
+    // Önce tüm veriyi sıralıyoruz.
+    this.allData.sort((a, b) => {
       const aValue = a[column];
       const bValue = b[column];
 
@@ -150,10 +151,8 @@ export class GridComponent implements OnInit {
       }
     });
 
-    // // Eğer aktif bir gruplandırma sütunu varsa gruplandırmayı uygula.
-    if (this.activeGroupingColumn) {
-      this.groupData(this.activeGroupingColumn, false);
-    }
+    // Sonrasında sıralı veriyi sayfa boyutuna göre bölüyoruz.
+    this.setCurrentPageData(false);
   }
 
 }
