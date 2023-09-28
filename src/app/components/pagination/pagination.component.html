@@ -1,0 +1,25 @@
+<div class="pagination">
+
+  <select [(ngModel)]="pageSize" (change)="updatePageSize()">
+    <option [ngValue]="5">5</option>
+    <option [ngValue]="10">10</option>
+    <option [ngValue]="15">15</option>
+    <option [ngValue]="20">20</option>
+    <option [ngValue]="50">50</option>
+  </select>
+
+  <span>{{ startRecord }}-{{ endRecord }} of {{ totalRecords }}</span>
+
+  <button (click)="firstPage()" [disabled]="pageNumber === 1">
+    <i class="fas fa-angle-double-left"></i>
+  </button>
+  <button (click)="previousPage()" [disabled]="pageNumber === 1">
+    <i class="fas fa-angle-left"></i>
+  </button>
+  <button (click)="nextPage()" [disabled]="pageNumber === totalPages">
+    <i class="fas fa-angle-right"></i>
+  </button>
+  <button (click)="lastPage()" [disabled]="pageNumber === totalPages">
+    <i class="fas fa-angle-double-right"></i>
+  </button>
+</div>

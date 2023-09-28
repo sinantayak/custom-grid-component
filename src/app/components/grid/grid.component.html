@@ -1,0 +1,72 @@
+<div class="content">
+  <div class="filter-button-wrapper" *ngIf="data.length">
+    <div class="filter-buttons">
+      <button class="filter-button " [ngClass]="{'active': activeGroupingColumn === 'firma'}"
+        (click)="groupData('firma')">Firmaya Göre <i class="fas fa-sort"></i></button>
+      <button class="filter-button" [ngClass]="{'active': activeGroupingColumn === 'il'}"
+        (click)="groupData('il')">İllere
+        Göre <i class="fas fa-sort"></i></button>
+      <button class="filter-button" [ngClass]="{'active': activeGroupingColumn === 'grup'}"
+        (click)="groupData('grup')">Gruba
+        Göre <i class="fas fa-sort"></i></button>
+    </div>
+    <div class="action-buttons">
+      <button class="action-button" (click)="reset()"> <i class="fas fa-redo"
+          [ngClass]="{'spinning': isLoading}"></i></button>
+    </div>
+  </div>
+
+  <div class="table">
+    <table *ngIf="data.length > 0">
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns" (click)="sortData(column)">{{ column }}
+            <i class="fas" *ngIf="sortingColumn === column"
+              [ngClass]="{'fa-sort-alpha-up': sortingOrder === 'asc', 'fa-sort-alpha-up-alt': sortingOrder === 'desc'}"></i>
+          </th>
+        </tr>
+      </thead>
+      <ng-container *ngIf="!(groupedData | keyvalue)?.length;else groupedDataGrid">
+        <tbody>
+          <tr class="even-odd" *ngFor="let row of data">
+            <td *ngFor="let column of columns">{{ row[column] }}</td>
+          </tr>
+        </tbody>
+      </ng-container>
+      <ng-template #groupedDataGrid>
+        <!-- Grupları ve veriyi oluşturma -->
+        <tbody>
+          <ng-container *ngFor="let group of groupedData | keyvalue:originalOrder">
+            <!-- Grup başlığı (Akordiyon başlangıcı) -->
+            <tr (click)="toggleAccordion(group.key)" [ngClass]="{'active': activeAccordions[group.key]}">
+              <td [attr.colspan]="columns.length">
+                <b>
+                  <span class="fw-500">{{ group.key }}</span>
+                </b>
+                <i class="fas"
+                  [ngClass]="{'fa-chevron-down': !activeAccordions[group.key], 'fa-chevron-up': activeAccordions[group.key]}"></i>
+              </td>
+            </tr>
+            <!-- Akordiyon içeriği (Veriler) -->
+            <ng-container *ngIf="activeAccordions[group.key]">
+              <tr class="groupped-datas" *ngFor="let row of group.value">
+                <td class="p1525" *ngFor="let column of columns">{{ row[column] }}</td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </ng-template>
+    </table>
+
+    <div class="paginator-wrapper" *ngIf="data.length">
+      <app-pagination [pageNumber]="pageNumber" [totalRecords]="totalRecords" [pageSize]="pageSize"
+        (pageChange)="onPageChange($event)">
+      </app-pagination>
+    </div>
+
+    <!-- Eğer veri yoksa bir mesaj göster -->
+    <div *ngIf="data.length === 0">
+      Veri bulunmamaktadır.
+    </div>
+  </div>
+</div>

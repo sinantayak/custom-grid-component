@@ -1,0 +1,190 @@
+.content {
+  padding: 1rem;
+}
+
+table {
+  font-family: 'Roboto', sans-serif;
+  font-size: .85rem;
+}
+
+
+table {
+  width: 100%; // Tablonun tam genişlikte olmasını sağlar.
+  border-collapse: collapse; // Hücre arasındaki boşlukları kaldırır.
+  border: 1px solid #eee; // Tablo etrafına gri bir çerçeve ekler.
+  color: rgb(50, 50, 50);
+}
+
+th {
+  text-transform: uppercase; // Kolon başlıklarını büyük harfe çevirir
+  text-align: left; // Kolon başlıklarını sola hizalar.
+  font-weight: bold; // Kolon başlıklarını kalın yapar.
+  cursor: pointer;
+
+}
+
+th,
+td {
+  padding: 15px; // Hücre içeriği ve kenarları arasında boşluk ekler.
+  border-bottom: 1px solid #eee; // Her satırın altına gri bir çizgi ekler.
+
+  max-width: 150px;
+  overflow-wrap: break-word;
+}
+
+tr {
+  &:hover {
+    cursor: default;
+    background-color: #e6e6e6; // Hover edildiğinde satıra açık mor bir arkaplan rengi ekler.
+  }
+}
+
+.even-odd {
+  &:nth-of-type(odd) {
+    background-color: #f9f9f9; // Tek satırlara açık gri bir arkaplan rengi ekler.
+  }
+}
+
+.filter-button-wrapper {
+  border-top: 1px solid #eee;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  // border-bottom: 1px solid #eee;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  // margin: .5rem 0;
+  padding: .5rem;
+  gap: 5px;
+
+  .filter-buttons {
+    gap: 5px;
+    display: flex;
+    flex-direction: row;
+
+    .filter-button {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      font-size: 14px;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      -ms-touch-action: manipulation;
+      touch-action: manipulation;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      background-image: none;
+      border: 1px solid transparent;
+      border-radius: 4px;
+
+      color: #333;
+      background-color: #fff;
+      border-color: #ddd;
+
+      &:hover {
+        color: #333;
+        background-color: #e6e6e6;
+        border-color: #adadad;
+      }
+    }
+  }
+
+  .action-button {
+    display: inline-block;
+    padding: 0.5rem;
+    font-size: 14px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+    color: #333;
+    background-color: #fff;
+    border-color: #ddd;
+
+    i {
+      margin: 0;
+      transition: transform 0.3s;
+      transform: rotate(360deg);
+    }
+
+    &:hover {
+      color: #333;
+      background-color: #e6e6e6;
+      border-color: #adadad;
+    }
+  }
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.p1525 {
+  padding: 15px 25px;
+}
+
+.groupped-datas {
+  padding: .2rem
+}
+
+tr.active td {
+  background-color: #f9f9f9;
+}
+
+i.fas {
+  margin-left: 10px;
+  transition: transform 0.3s;
+}
+
+i.fa-chevron-up {
+  transform: rotate(180deg);
+}
+
+i.fa-chevron-up {
+  transform: rotate(180deg);
+}
+
+.paginator-wrapper {
+  // border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #eee;
+  border-left: 1px solid #eee;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  display: flex;
+  justify-content: right;
+  // margin: .5rem 0;
+  padding: .5rem;
+}
+
+.active {
+  background-color: #f9f9f9 !important;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinning {
+  animation: spin .250s ease-out;
+}
