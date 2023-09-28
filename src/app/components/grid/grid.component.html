@@ -2,13 +2,13 @@
   <div class="filter-button-wrapper" *ngIf="data.length">
     <div class="filter-buttons">
       <button class="filter-button " [ngClass]="{'active': activeGroupingColumn === 'firma'}"
-        (click)="groupData('firma')">Firmaya Göre <i class="fas fa-sort"></i></button>
+        (click)="groupData('firma')">Firmaya Göre <i class="fas fa-filter"></i></button>
       <button class="filter-button" [ngClass]="{'active': activeGroupingColumn === 'il'}"
         (click)="groupData('il')">İllere
-        Göre <i class="fas fa-sort"></i></button>
+        Göre <i class="fas fa-filter"></i></button>
       <button class="filter-button" [ngClass]="{'active': activeGroupingColumn === 'grup'}"
         (click)="groupData('grup')">Gruba
-        Göre <i class="fas fa-sort"></i></button>
+        Göre <i class="fas fa-filter"></i></button>
     </div>
     <div class="action-buttons">
       <button class="action-button" (click)="reset()"> <i class="fas fa-redo"
@@ -21,9 +21,14 @@
       <thead>
         <tr>
           <th *ngFor="let column of columns" (click)="sortData(column)">{{ column }}
-            <i class="fas" *ngIf="sortingColumn === column"
-              [ngClass]="{'fa-sort-alpha-up': sortingOrder === 'asc', 'fa-sort-alpha-up-alt': sortingOrder === 'desc'}"></i>
+
+            <i class="fas fa-sort gray" *ngIf="sortingColumn != column || sortingOrder === null"></i>
+            <i class="fas" *ngIf="sortingColumn === column" [ngClass]="{
+                  'fa-sort-alpha-down': sortingOrder === 'asc', 
+                  'fa-sort-alpha-down-alt': sortingOrder === 'desc'
+               }"></i>
           </th>
+
         </tr>
       </thead>
       <ng-container *ngIf="!(groupedData | keyvalue)?.length;else groupedDataGrid">
